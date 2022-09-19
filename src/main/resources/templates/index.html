@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.tymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciamento Usuarios</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+	<div class="container-fluid text-center">
+		<div><h2>Gerenciamento de Pessoas</h2></div>
+		<div class="m-2">
+			<a class="h3" th:href="@{index/formulario_pessoas}">Adicionar novo usuario</a>
+		</div>
+		
+		<div th:if="${mensagem}" class="alert alert-success text-center">
+			[[${mensagem}]]
+		</div>
+		<div>
+		<table class="table table-bordered">
+			<thead class="thead-dark">
+				<tr>
+					<th>Id:</th>
+					<th>Nome:</th>
+					<th>Email:</th>
+					<th>Cpf:</th>
+					<th>Data de Nascimento:</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="pessoas : ${listaPessoas}">
+				<tr>
+					<td>[[${pessoas.id}]]</td>
+					<td>[[${pessoas.nome}]]</td>
+					<td>[[${pessoas.email}]]</td>
+					<td>[[${pessoas.cpf}]]</td>
+					<td id="#dn" th:field="*{dataNascimento}">[[${pessoas.dataNascimento}]]</td>
+					<td>
+						<a class="h4 mr-3" th:href="@{'/pessoas/editar/' + ${pessoas.id}}">Editar</a>
+						<a class="h4" th:href="@{'/pessoas/deletar/' + ${pessoas.id}}">Deletar</a>
+					</td>
+				</tr>
+				</th:block>
+			</tbody>
+		</table>
+		
+		</div>
+	</div>
+</body>
+</html>
